@@ -30,3 +30,8 @@ dependencies {
 
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.hwan3434'
+version = '1.0.3'
+
+repositories {
+    mavenCentral()
+}
