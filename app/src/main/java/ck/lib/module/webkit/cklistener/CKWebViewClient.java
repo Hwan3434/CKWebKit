@@ -51,40 +51,6 @@ public class CKWebViewClient extends WebViewClient {
             view.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         }
 
-        if(url.equals("vguardend://")){
-            try {
-                mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-            }catch (ActivityNotFoundException e){
-                e.printStackTrace();
-            }
-
-            return true;
-        }
-
-        if(url.startsWith("kftc-bankpay://")){
-            try {
-                mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-            }catch (ActivityNotFoundException e){
-                e.printStackTrace();
-            }
-            return true;
-        }
-
-
-        if(url.startsWith("ahnlabv3mobileplus:")){
-
-            if (mActivity != null) {
-                try {
-                    mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                }catch (ActivityNotFoundException e){
-                    e.printStackTrace();
-                }
-
-                return true;
-            }
-        }
-
-
         if(url.startsWith("tel:")){
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
             mActivity.startActivity(intent);
@@ -158,8 +124,18 @@ public class CKWebViewClient extends WebViewClient {
                 }
                 return true;
             }
-        } else {
-            return false;
+        } else if(!url.startsWith("http")){
+
+            if (mActivity != null) {
+                try {
+                    mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                }catch (ActivityNotFoundException e){
+                    e.printStackTrace();
+                }
+
+                return true;
+            }
+
         }
 
         return false;
