@@ -2,7 +2,7 @@
 
 LeeJeongHwan
 
-Tag : 1.0.5
+현재 버전 : 1.0.5
 
 
 allprojects {
