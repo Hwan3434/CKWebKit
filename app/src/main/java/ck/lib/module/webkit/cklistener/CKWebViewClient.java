@@ -127,6 +127,7 @@ public class CKWebViewClient extends WebViewClient {
         } else if(!url.startsWith("http")){
 
             if (mActivity != null) {
+
                 try {
                     mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 }catch (ActivityNotFoundException e){
@@ -134,6 +135,18 @@ public class CKWebViewClient extends WebViewClient {
                 }
 
                 return true;
+            }
+
+        } else if(url.startsWith("https://play.google.com/store/apps/details?id=")){
+
+            try {
+                String directUrl = url.split("store/apps/")[1];
+                mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://" + directUrl)));
+                return true;
+            } catch (Exception e) {
+                // 마켓으로 못보냇으면 웹으로라도 보내자ㅎㅎ
+                e.printStackTrace();
+                view.loadUrl(url);
             }
 
         }
