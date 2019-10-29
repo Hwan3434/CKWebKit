@@ -2,7 +2,7 @@
 
 LeeJeongHwan
 
-현재 버전 : 1.2.1
+현재 버전 : 1.2.2
 
 
 allprojects {
