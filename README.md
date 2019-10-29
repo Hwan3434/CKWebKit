@@ -1,9 +1,6 @@
 # CKWebKit
 
-LeeJeongHwan
-
-현재 버전 : 1.2.2
-
+[![](https://jitpack.io/v/Hwan3434/CKWebKit.svg)](https://jitpack.io/#Hwan3434/CKWebKit)
 
 allprojects {
 	repositories {
