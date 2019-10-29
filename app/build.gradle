@@ -4,11 +4,10 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
     defaultConfig {
-//        applicationId "ck.lib.module.webkit"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.2.2"
+        versionName "1.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -1,1 +1,1 @@
-include ':app', ':ckspinner'
+include ':app'
