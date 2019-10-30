@@ -1,20 +1,6 @@
 # CKWebKit
 
-LeeJeongHwan
-
-현재 버전 : 1.2.2
-
-
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-  
-dependencies {
-	        implementation 'com.github.Hwan3434:CKWebKit:1.2.1'
-}
+[![](https://jitpack.io/v/Hwan3434/CKWebKit.svg)](https://jitpack.io/#Hwan3434/CKWebKit)
 
 ----------------------------------------------------------------------------------------------------
 
