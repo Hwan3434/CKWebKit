@@ -21,6 +21,8 @@ import android.net.http.SslError;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Message;
+import android.support.v4.content.res.TypedArrayUtils;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Base64;
 import android.view.KeyEvent;
@@ -48,6 +50,8 @@ import android.webkit.WebViewClient;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -92,6 +96,8 @@ public class CKWebView extends WebView {
     protected boolean mGeolocationEnabled;
     protected String mUploadableFileTypes = "*/*";
     protected final Map<String, String> mHttpHeaders = new HashMap<String, String>();
+
+    protected boolean isLongClickDrag = true; // true = 롱 클릭 영역선택 가능.
 
     public CKWebView(Context context) {
         super(context);
@@ -419,6 +425,30 @@ public class CKWebView extends WebView {
         webSettings.setSupportZoom(enabled);
         webSettings.setBuiltInZoomControls(enabled);
     }
+
+    public void setLongClickDrag(boolean enabled){
+        isLongClickDrag = enabled;
+    }
+
+    public void setUserAgentCustom(String agent){
+        getSettings().setUserAgentString(getSettings().getUserAgentString() + agent);
+    }
+
+    public void setHeaders(ArrayList<String> names, ArrayList<String> values){
+
+        if (names == null || values == null)
+            throw new NullPointerException();
+
+        if(names.size() != values.size())
+            throw new ArrayIndexOutOfBoundsException();
+
+
+        for (String name : names)
+            for (String value : values)
+                addHttpHeader(name,value);
+
+    }
+
 
     @SuppressLint({ "SetJavaScriptEnabled" })
     protected void init(Context context) {
@@ -995,6 +1025,14 @@ public class CKWebView extends WebView {
             }
 
         });
+
+        setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return !isLongClickDrag;
+            }
+        });
+
     }
 
     @Override
