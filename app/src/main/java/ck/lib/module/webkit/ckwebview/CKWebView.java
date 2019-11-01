@@ -428,6 +428,7 @@ public class CKWebView extends WebView {
 
     public void setLongClickDrag(boolean enabled){
         isLongClickDrag = enabled;
+        setLongClickable(!isLongClickDrag);
     }
 
     public void setUserAgentCustom(String agent){
