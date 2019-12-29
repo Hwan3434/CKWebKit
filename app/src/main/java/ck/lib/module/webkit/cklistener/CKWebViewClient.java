@@ -69,6 +69,12 @@ public class CKWebViewClient extends WebViewClient {
             return true;
         }
 
+        if(url.endsWith(".pdf")){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            mActivity.startActivity(i);
+            return true;
+        }
+
         if(url.startsWith(GOOGLE_PLAY_STORE_PREFIX)){
 
 
