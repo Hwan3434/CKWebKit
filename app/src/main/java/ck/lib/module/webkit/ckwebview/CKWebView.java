@@ -720,7 +720,7 @@ public class CKWebView extends WebView {
             // file upload callback (Android 4.1 (API level 16) -- Android 4.3 (API level 18)) (hidden method)
             @SuppressWarnings("unused")
             public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-                openFileInput(uploadMsg, null, false);
+                openFileInput(uploadMsg, null, false, acceptType);
             }
 
             // file upload callback (Android 5.0 (API level 21) -- current) (public method)
@@ -729,7 +729,7 @@ public class CKWebView extends WebView {
                 if (Build.VERSION.SDK_INT >= 21) {
                     final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
 
-                    openFileInput(null, filePathCallback, allowMultiple);
+                    openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
 
                     return true;
                 }
@@ -1175,7 +1175,7 @@ public class CKWebView extends WebView {
     }
 
     @SuppressLint("NewApi")
-    protected void openFileInput(final ValueCallback<Uri> fileUploadCallbackFirst, final ValueCallback<Uri[]> fileUploadCallbackSecond, final boolean allowMultiple) {
+    protected void openFileInput(final ValueCallback<Uri> fileUploadCallbackFirst, final ValueCallback<Uri[]> fileUploadCallbackSecond, final boolean allowMultiple, final String... fileType) {
 
         if (mFileUploadCallbackFirst != null) {
             mFileUploadCallbackFirst.onReceiveValue(null);
@@ -1196,7 +1196,15 @@ public class CKWebView extends WebView {
             }
         }
 
-        i.setType(mUploadableFileTypes);
+        if(fileType == null || fileType.length != 0){
+            i.setType(mUploadableFileTypes);
+        }else {
+            for (String type : fileType) {
+                if (!TextUtils.isEmpty(type)) {
+                    i.setType(type);
+                }
+            }
+        }
 
         if (mFragment != null && mFragment.get() != null && Build.VERSION.SDK_INT >= 11) {
             mFragment.get().startActivityForResult(Intent.createChooser(i, getFileUploadPromptLabel()), mRequestCodeFilePicker);
