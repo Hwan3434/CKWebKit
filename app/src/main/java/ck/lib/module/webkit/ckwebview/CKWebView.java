@@ -1177,11 +1177,6 @@ public class CKWebView extends WebView {
     @SuppressLint("NewApi")
     protected void openFileInput(final ValueCallback<Uri> fileUploadCallbackFirst, final ValueCallback<Uri[]> fileUploadCallbackSecond, final boolean allowMultiple) {
 
-        if(true){
-            // 이하 안드로이드에서 직접 처리하도록
-            return;
-        }
-
         if (mFileUploadCallbackFirst != null) {
             mFileUploadCallbackFirst.onReceiveValue(null);
         }
