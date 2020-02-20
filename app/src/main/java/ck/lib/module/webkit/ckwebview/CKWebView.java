@@ -1201,7 +1201,7 @@ public class CKWebView extends WebView {
             i.setType(mUploadableFileTypes);
         }else {
 
-            Log.d("CKWEBVIEW","fileType length : " + fileType.length);
+            Log.d("CKWEBVIEW","fileType length : " + fileType.length + " / file 0 = " + fileType[0]);
 
             if(fileType.length == 1 && fileType[0].equals("image/*")){
 
