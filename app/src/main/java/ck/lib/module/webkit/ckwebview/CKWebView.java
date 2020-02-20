@@ -730,9 +730,6 @@ public class CKWebView extends WebView {
                 if (Build.VERSION.SDK_INT >= 21) {
                     final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
 
-
-                    Log.d("CKWEBVIEW","webview !! :: " + fileChooserParams.isCaptureEnabled());
-
                     openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
 
                     return true;
@@ -1210,12 +1207,14 @@ public class CKWebView extends WebView {
 
                 String type = fileType[0];
                 Log.d("CKWEBVIEW","webview load only image file : " + type);
-                if(type.contains("image/*")){
+                if(TextUtils.isEmpty(type)){
+                    Log.d("CKWEBVIEW","webview load file : " + type);
+                    i.setType(mUploadableFileTypes);
+                }else if(type.contains("image/*")){
                     i.removeCategory(Intent.CATEGORY_OPENABLE);
                     i.setAction(Intent.ACTION_PICK);
                     i.setType(type);
                 }else {
-                    Log.d("CKWEBVIEW","webview load file : " + type);
                     i.setType(type);
                 }
 
