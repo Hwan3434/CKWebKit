@@ -730,10 +730,7 @@ public class CKWebView extends WebView {
                 if (Build.VERSION.SDK_INT >= 21) {
                     final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
 
-                    if (mCustomWebChromeClient != null) {
-                        mCustomWebChromeClient.onShowFileChooser(webView, filePathCallback, fileChooserParams);
-                    }
-//                    openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
+                    openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
 
                     return true;
                 }
@@ -1200,7 +1197,7 @@ public class CKWebView extends WebView {
             }
         }
 
-        if(fileType == null || fileType.length != 0){
+        if(fileType == null || fileType.length == 0){
             i.setType(mUploadableFileTypes);
         }else {
             Log.d("CKWEBVIEW","fileType length : " + fileType.length);
