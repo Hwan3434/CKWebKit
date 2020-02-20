@@ -25,6 +25,7 @@ import android.support.v4.content.res.TypedArrayUtils;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1199,9 +1200,19 @@ public class CKWebView extends WebView {
         if(fileType == null || fileType.length != 0){
             i.setType(mUploadableFileTypes);
         }else {
-            for (String type : fileType) {
-                if (!TextUtils.isEmpty(type)) {
+            if(fileType.length == 1){
+                String type = fileType[0];
+                if(type.contains("image/*")){
+                    Log.d("CKWEBVIEW","webview load only image files");
+                    i.removeCategory(Intent.CATEGORY_OPENABLE);
+                    i.setAction(Intent.ACTION_PICK);
                     i.setType(type);
+                }
+            }else {
+                for (String type : fileType) {
+                    if (!TextUtils.isEmpty(type)) {
+                        i.setType(type);
+                    }
                 }
             }
         }
