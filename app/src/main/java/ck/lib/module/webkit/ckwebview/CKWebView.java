@@ -1200,15 +1200,22 @@ public class CKWebView extends WebView {
         if(fileType == null || fileType.length == 0){
             i.setType(mUploadableFileTypes);
         }else {
+
             Log.d("CKWEBVIEW","fileType length : " + fileType.length);
+
             if(fileType.length == 1 && fileType[0].equals("image/*")){
+
                 String type = fileType[0];
                 Log.d("CKWEBVIEW","webview load only image file : " + type);
                 if(type.contains("image/*")){
                     i.removeCategory(Intent.CATEGORY_OPENABLE);
                     i.setAction(Intent.ACTION_PICK);
                     i.setType(type);
+                }else {
+                    Log.d("CKWEBVIEW","webview load file : " + type);
+                    i.setType(type);
                 }
+
             }else {
                 for (String type : fileType) {
                     if (!TextUtils.isEmpty(type)) {
