@@ -730,7 +730,10 @@ public class CKWebView extends WebView {
                 if (Build.VERSION.SDK_INT >= 21) {
                     final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
 
-                    openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
+                    if (mCustomWebChromeClient != null) {
+                        mCustomWebChromeClient.onShowFileChooser(webView, filePathCallback, fileChooserParams);
+                    }
+//                    openFileInput(null, filePathCallback, allowMultiple, fileChooserParams.getAcceptTypes());
 
                     return true;
                 }
