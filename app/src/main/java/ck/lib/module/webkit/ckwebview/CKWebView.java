@@ -62,6 +62,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 
+import static android.webkit.WebView.HitTestResult.EDIT_TEXT_TYPE;
+
 /** Advanced WebView component for Android that works as intended out of the box */
 @SuppressWarnings("deprecation")
 public class CKWebView extends WebView {
@@ -1031,7 +1033,18 @@ public class CKWebView extends WebView {
         setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return !isLongClickDrag;
+
+                HitTestResult result = getHitTestResult();
+
+                Log.e("HITTESTRESULT", "result = " + result);
+
+                if(result.getType() == EDIT_TEXT_TYPE){
+                    return false;
+                }else {
+                    return true;
+                }
+
+//                return !isLongClickDrag;
             }
         });
 
